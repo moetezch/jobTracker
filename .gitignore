@@ -1,0 +1,5 @@
+node_modules/
+todo.md
+client/.env.development
+client/.env.test
+client/src/firebase/firebase.js
