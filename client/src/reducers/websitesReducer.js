@@ -1,12 +1,12 @@
 export default (state = [], action) => {
   switch (action.type) {
-    case 'ADD_JOB':
+    case 'ADD_WEBSITE':
       return [
         ...state,
-        action.job
+        action.website
       ];
-    case 'SET_JOBS':
-    return action.jobs
+    case 'SET_WEBSITES':
+    return action.websites
     default:
       return state;
   }
