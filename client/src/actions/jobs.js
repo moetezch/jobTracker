@@ -1,6 +1,6 @@
 import database from '../firebase/firebase'
 
-
+// ADD_JOB
 export const addJob = (job) => ({
   type: 'ADD_JOB',
   job
@@ -48,6 +48,38 @@ export const startSetJobs = () => {
       });
 
       dispatch(setJobs(jobs));
+    });
+  };
+};
+
+
+// REMOVE_JOB
+export const removeJob = ({ id } = {}) => ({
+  type: 'REMOVE_JOB',
+  id
+});
+
+export const startRemoveJob = ({ id } = {}) => {
+  return (dispatch, getState) => {
+  //  const uid = getState().auth.uid;
+    return database.ref(`jobs/${id}`).remove().then(() => {
+      dispatch(removeJob({ id }));
+    });
+  };
+};
+
+// EDIT_WEBSITE
+export const editJob = (id, updates) => ({
+  type: 'EDIT_JOB',
+  id,
+  updates
+});
+
+export const startEditJob = (id, updates) => {
+  return (dispatch, getState) => {
+  //  const uid = getState().auth.uid;
+    return database.ref(`jobs/${id}`).update(updates).then(() => {
+      dispatch(editJob(id, updates));
     });
   };
 };

@@ -13,6 +13,7 @@ import WebsitesList from './website/WebsitesList'
 import NewWebsite from './website/NewWebsite'
 import NewJob from './job/NewJob'
 import EditWebsite from './website/EditWebsite'
+import EditJob from './job/EditJob'
 class App extends Component {
   render() {
     return (
@@ -27,9 +28,10 @@ class App extends Component {
           <Route path="/dashboard" component={Dashboard} />
           <Route exact path="/jobs" component={JobList} />
           <Route path="/jobs/new" component={NewJob} />
+          <Route path="/jobs/edit/:id" component={EditJob} />
           <Route exact path="/websites" component={WebsitesList} />
-          <Route exact path="/websites/new" component={NewWebsite} />
-          <Route exact path="/websites/edit/:id" component={EditWebsite} />
+          <Route path="/websites/new" component={NewWebsite} />
+          <Route path="/websites/edit/:id" component={EditWebsite} />
           <Route component={NotFoundPage} />
         </Switch>
         <Footer/>

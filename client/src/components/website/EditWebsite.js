@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
-import { startEditWebsite,startSetWebsites } from '../../actions/websites'
+import { startEditWebsite,startSetWebsites,startRemoveWebsite } from '../../actions/websites'
 import validate from '../../utils/validateWebsite'
 
 const renderInput = ({ input, label, type, meta: { touched, error }, ...custom }) => (
@@ -21,9 +21,6 @@ class EditWebsite extends Component {
   componentDidMount() {
     this.props.startSetWebsites()
    this.handleInitialize();
-   console.log(this.props.website);
-   
-
   }
   handleInitialize() {
   
@@ -45,8 +42,7 @@ class EditWebsite extends Component {
   }
   onSubmit = (website) => {
     this.props.startEditWebsite(this.props.match.params.id,website)
-    this.props.history.push('/websites');
-    console.log(this.props.website);
+    this.props.history.push('/websites')
   }
 
   render() {
@@ -72,9 +68,12 @@ class EditWebsite extends Component {
     >
     </Field>
     <div>
-    <button className="button" type="submit" >Update</button>
-    <button className="button" disabled={pristine || submitting} onClick={reset}>
-      Clear Values
+    <button className="button is-primary" type="submit" >Update</button>
+    <button className="button is-danger" onClick={() => {
+      this.props.startRemoveWebsite({ id: this.props.website.id})
+      this.props.history.push('/websites')
+    }}>
+      Delete
   </button>
   </div>
   </form>
@@ -90,7 +89,8 @@ const mapStateToProps = (state,props) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   startEditWebsite: (id,website) => dispatch(startEditWebsite(id,website)),
-  startSetWebsites :() => dispatch(startSetWebsites())
+  startSetWebsites :() => dispatch(startSetWebsites()),
+  startRemoveWebsite: (id)=> dispatch(startRemoveWebsite(id))
 });
 EditWebsite = connect(mapStateToProps, mapDispatchToProps)(EditWebsite)
 

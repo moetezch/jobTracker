@@ -12,14 +12,14 @@ class JobsList extends Component {
     return (
       <div className="container">
       <section className="container">
-        <Link className='button' to="jobs/new">add</Link>
+        <Link className='button is-primary is-pulled-right' to="jobs/new"><i className="fas fa-plus"></i></Link>
         {
           this.props.jobs.length === 0 ? (
             <div className="">
               <span>No Jobs</span>
             </div>
           ) : (
-            <table className="table is-striped ">
+            <table className="table is-striped is-hoverable is-fullwidth">
             <thead>
             <tr>
               <th title="number">Number</th>
@@ -31,7 +31,7 @@ class JobsList extends Component {
               <th title="reply">Reply</th>
               <th title="Interview">Interview</th>
               <th title="notes">Notes</th>
-              <th title="edit">Edit</th>
+              <th title="edit"></th>
             </tr>
           </thead>
             <tbody>
@@ -50,7 +50,7 @@ class JobsList extends Component {
                   <td>{job.reply}</td>
                   <td>{job.interview}</td>
                   <td>{job.notes}</td>
-                  <td><Link className="button" to="/">Edit</Link></td>
+                  <td><Link className="button is-medium is-rounded is-light" to={`jobs/edit/${job.id}`}>Edit</Link></td>
               </tr>
                 )
               })}
