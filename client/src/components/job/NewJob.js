@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 //import moment from 'moment';
 import { startAddJob } from '../../actions/jobs'
-import {startSetWebsites} from '../../actions/websites'
+import { startSetWebsites } from '../../actions/websites'
 import country_list from '../../utils/countries'
 import validate from '../../utils/validateJob'
 
@@ -35,7 +35,7 @@ const renderTextarea = ({ input, label, type, meta: { touched, error }, }) => (
     </div>
   </div>
 )
-const renderSelect = ({ input, type, label, meta: { touched, error },icon,...custom}) => (
+const renderSelect = ({ input, type, label, meta: { touched, error }, icon, ...custom }) => (
 
   <div className="field">
     <label className="label">{label}</label>
@@ -61,23 +61,23 @@ class NewJob extends Component {
   }
 
   getCountries() {
-    return country_list.map((country)=>{
+    return country_list.map((country) => {
       return (<option value={country} key={country}>{country}</option>)
-      
+
     })
-    
+
   }
-  getWebsites (){
-    return this.props.websites.map((website)=>{
+  getWebsites() {
+    return this.props.websites.map((website) => {
       return (<option value={website.name} key={website.id}>{website.name}</option>)
-      
+
     })
   }
   onSubmit = (job) => {
 
-   this.props.startAddJob(job)
-   // console.log(job);
-   this.props.history.push('/jobs');
+    this.props.startAddJob(job)
+    // console.log(job);
+    this.props.history.push('/jobs');
 
   }
 
@@ -86,18 +86,10 @@ class NewJob extends Component {
     const { handleSubmit, pristine, reset, submitting } = this.props
 
     return (
-      <div className="">
-
-        <section className="container">
+      <section className="section">
+        <div className="container">
           <h2 className="is-size-2">I applied for : </h2>
           <form onSubmit={handleSubmit(this.onSubmit)}>
-            <Field
-              name="date"
-              type="date"
-              component={renderInput}
-              label="Date"
-            >
-            </Field>
             <Field
               name="jobTitle"
               type="text"
@@ -105,6 +97,14 @@ class NewJob extends Component {
               label="Job Title"
             >
             </Field>
+            <Field
+              name="date"
+              type="date"
+              component={renderInput}
+              label="Date"
+            >
+            </Field>
+
             <Field
               name="company"
               type="text"
@@ -129,9 +129,9 @@ class NewJob extends Component {
               label="Found On"
               icon="fas fa-location-arrow "
             >
-            <option />
-            <option value="N/A">N/A</option>
-            {this.getWebsites()}
+              <option />
+              <option value="N/A">N/A</option>
+              {this.getWebsites()}
             </Field>
 
             <Field
@@ -143,16 +143,25 @@ class NewJob extends Component {
             </Field>
 
 
-            <div>
-              <button className="button" type="submit" >Save</button>
-              <button className="button" disabled={pristine || submitting} onClick={reset}>
-                Clear Values
-            </button>
+            <div className="buttons">
+              <button className="button is-primary" type="submit" >
+                <span>Save</span>
+                <span className="icon is-small">
+                  <i className="fas fa-save"></i>
+                </span>
+              </button>
+              <button className="button is-warning" disabled={pristine || submitting} onClick={reset}>
+                <span>Clear</span>
+                <span className="icon is-small">
+                  <i className="fas fa-eraser"></i>
+                </span>
+              </button>
             </div>
           </form>
-        </section>
+        </div>
+      </section>
 
-      </div>
+
     )
   }
 }

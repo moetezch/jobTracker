@@ -1,18 +1,34 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { startLogout } from '../actions/auth';
+import { Navbar } from 'react-bulma-components'
 
-const Header =({ startLogout })=>{
+const Header = ({ startLogout }) => {
   return (
-    <div>
-    <NavLink to='/dashboard' activeClassName="is-active">Dashboard</NavLink>
-    <NavLink to='/jobs' activeClassName="is-active">Jobs</NavLink>
-    <NavLink to='/websites' activeClassName="is-active">Websites</NavLink>
-    <button className="button button--link" onClick={startLogout}>Logout</button>
+    <Navbar color="primary">
+      <Navbar.Brand >
+        <NavLink to="/dashboard" className="navbar-item" activeClassName="is-active">
+          Job Hunt Tracker
+    </NavLink>
+        <Navbar.Burger />
+      </Navbar.Brand>
+      <Navbar.Menu>
+        <Navbar.Container >
+          <NavLink to='/jobs' activeClassName="is-active" className=" navbar-item">Jobs</NavLink>
+          <NavLink to='/websites' activeClassName="is-active" className=" navbar-item">Websites</NavLink>
+        </Navbar.Container>
+        <Navbar.Container position="end" >
+          <Navbar.Item onClick={startLogout}>
+            <span className="icon is-small">
+              <i className="fa fa-power-off" style={{ marginRight: '1em' }}></i>
+            </span>
+            Logout
+        </Navbar.Item>
+        </Navbar.Container>
 
-    </div>
-
+      </Navbar.Menu>
+    </Navbar>
   )
 }
 

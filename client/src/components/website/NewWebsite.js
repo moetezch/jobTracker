@@ -29,8 +29,9 @@ class NewWebsite extends Component {
     const { handleSubmit, pristine, reset, submitting } = this.props
 
     return (
-      <div>
-      <section className="column container">
+      
+      <section className="section">
+      <div className="container">
           <h2 className="is-size-2">New Job website </h2>
        <form onSubmit={handleSubmit(this.onSubmit)}>
       <Field
@@ -47,15 +48,23 @@ class NewWebsite extends Component {
       label="URL"
     >
     </Field>
-    <div>
-    <button className="button" type="submit" >Save</button>
-    <button className="button" disabled={pristine || submitting} onClick={reset}>
-      Clear Values
-  </button>
+    <div className="buttons">
+    <button className="button is-primary" type="submit" >
+      <span>Save</span>
+      <span className="icon is-small">
+        <i className="fas fa-save"></i>
+      </span>
+    </button>
+    <button className="button is-warning" disabled={pristine || submitting} onClick={reset}>
+      <span>Clear</span>
+      <span className="icon is-small">
+        <i className="fas fa-eraser"></i>
+      </span>
+    </button>
   </div>
   </form>
-    </section>
-      </div>
+  </div>
+  </section>
     );
   }
 }

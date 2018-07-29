@@ -11,9 +11,10 @@ class WebsitesList extends Component {
   }
   render() {
     return (
+      <section className="section">
       <div className="container">
-        <Link className='button is-primary is-pulled-right' to="websites/new" style={{ marginBottom: "15px" }}><i className="fas fa-plus"></i></Link>
-        <section>
+        <Link className='button is-primary is-pulled-right' to="websites/new"><i className="fas fa-plus"></i></Link>
+       
           {
             this.props.websites.length === 0 ? (
               <div className="">
@@ -54,8 +55,9 @@ class WebsitesList extends Component {
 
               )
           }
-        </section>
+        
       </div>
+      </section>
     );
   }
 }

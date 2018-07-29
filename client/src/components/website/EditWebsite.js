@@ -49,8 +49,9 @@ class EditWebsite extends Component {
     const { handleSubmit} = this.props
 
     return (
-      <div>
-      <section className="column container">
+      
+      <section className="section">
+      <div className="container">
           <h2 className="is-size-2">Edit Website</h2>
        <form onSubmit={handleSubmit(this.onSubmit)}>
       <Field
@@ -84,8 +85,9 @@ class EditWebsite extends Component {
   </button>
   </div>
   </form>
+  </div>
     </section>
-      </div>
+     
     );
   }
 }

@@ -33,7 +33,8 @@ class EditJob extends Component {
     const { handleSubmit} = this.props
 
     return (
-      <section className="container">
+      <section className="section">
+      <div className="container">
       <h2 className="is-size-2">{this.props.job.jobTitle} @ {this.props.job.company}</h2>
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Field
@@ -57,7 +58,8 @@ class EditJob extends Component {
        <span>Update</span>
       <span className="icon is-small">
         <i className="fas fa-sync"></i>
-      </span></button>
+      </span>
+      </button>
           <button className="button is-danger" onClick={() => {
             this.props.startRemoveJob({ id: this.props.job.id})
             this.props.history.push('/jobs')
@@ -69,6 +71,7 @@ class EditJob extends Component {
         </button>
         </div>
       </form>
+      </div>
     </section>
 
 

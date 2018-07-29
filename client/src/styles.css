@@ -1,3 +1,44 @@
+body{
+  color: #333333;
+}
+
 .is-active{
   font-weight: bold;
+}
+
+.box-layout {
+  align-items: center;
+  background: url('/images/bg.jpg');
+  background-size: cover;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw; 
+}
+
+.box-layout__box {
+  
+  opacity: .8;
+  border-radius: 3px;
+  padding:3.2rem 1.6rem;
+  text-align: center;
+  width: 25rem;
+}
+
+.box-layout__title {
+  margin: 0 0 1.6rem 0;
+  line-height: 1;
+}
+
+.loader {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.loader__image {
+  height: 6rem;
+  width: 6rem;
 }

@@ -10,8 +10,9 @@ class JobsList extends Component {
 
   render() {
     return (
+      <section className="section">
       <div className="container">
-      <section className="container">
+    
         <Link className='button is-primary is-pulled-right' to="jobs/new"><i className="fas fa-plus"></i></Link>
         {
           this.props.jobs.length === 0 ? (
@@ -58,8 +59,9 @@ class JobsList extends Component {
               </table>
             )
         }
-        </section>
+        
       </div>
+      </section>
     );
   }
 }

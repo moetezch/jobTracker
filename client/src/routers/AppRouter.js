@@ -6,7 +6,6 @@ import createHistory from 'history/createBrowserHistory'
 import Dashboard from '../components/Dashboard'
 import Login from '../components/Login'
 import NotFoundPage from '../components/NotFoundPage'
-import Footer from '../components/Footer'
 import JobList from '../components/job/JobsList'
 import WebsitesList from '../components/website/WebsitesList'
 import NewWebsite from '../components/website/NewWebsite'
@@ -40,7 +39,6 @@ class AppRouter extends Component {
           <PrivateRoute path="/websites/edit/:id" component={EditWebsite} />
           <Route component={NotFoundPage} />
         </Switch>
-        <Footer/>
         </div>
 
         </Router>
