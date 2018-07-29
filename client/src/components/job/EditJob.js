@@ -16,54 +16,17 @@ const renderInput = ({ input, label, type, meta: { touched, error }, ...custom }
   </div>
 )
 
-const renderSelect = ({ input, type, label, meta: { touched, error },icon,...custom}) => (
-
-  <div className="field">
-    <label className="label">{label}</label>
-    <div className="control  has-icons-left">
-      <div className="select">
-        <select  {...input} {...custom} />
-      </div>
-      <div className="icon is-small is-left">
-        <i className={icon}></i>
-      </div>
-    </div>
-    <div className="has-text-danger" style={{ marginBottom: "20px" }}>
-      {touched && error && <span>{error}</span>}
-    </div>
-  </div>
-)
 
 class EditJob extends Component {
   componentDidMount() {
     this.props.startSetJobs()
-    this.handleInitialize();
   }
-  handleInitialize() {
-  
-    let initData={}
-    if (this.props.website) {
-      initData = {
-        name:this.props.website.reply,
-        url: this.props.website.interview
-        }
-    }else {
-      initData = {
-        reply:"",
-        reply: ""
-        };
-    }
 
-  
-    this.props.initialize(initData);
-  }
   onSubmit = (job) => {
-   // this.props.startAddJob(job)
    this.props.startEditJob(this.props.match.params.id,job)
 
     console.log(job);
    this.props.history.push('/jobs');
-
   }
 
   render() {
@@ -89,13 +52,20 @@ class EditJob extends Component {
       </Field>
 
 
-        <div>
-          <button className="button is-primary" type="submit" >Update</button>
+      <div className="buttons">
+      <button className="button is-primary" type="submit" >
+       <span>Update</span>
+      <span className="icon is-small">
+        <i className="fas fa-sync"></i>
+      </span></button>
           <button className="button is-danger" onClick={() => {
             this.props.startRemoveJob({ id: this.props.job.id})
             this.props.history.push('/jobs')
           }}>
-            Delete
+          <span>Delete</span>
+          <span className="icon is-small">
+            <i className="fas fa-times"></i>
+          </span>
         </button>
         </div>
       </form>

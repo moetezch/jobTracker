@@ -7,13 +7,14 @@ export const addWebsite = (website) => ({
 });
 
 export const startAddWebsite = (websiteData={})=>{
-  return (dispatch)=>{
+  return (dispatch, getState)=>{
+    const uid = getState().auth.uid;
     const {
       name = '',
       url = ''
     }=websiteData
     const website ={name,url}
-    database.ref('websites').push(website).then((ref)=>{
+    database.ref(`users/${uid}/websites`).push(website).then((ref)=>{
       dispatch(addWebsite({
         id:ref.key,
         ...website
@@ -29,9 +30,9 @@ export const setWebsites = (websites) => ({
 });
 
 export const startSetWebsites = () => {
-  return (dispatch) => {
-   
-    return database.ref(`websites`).once('value').then((snapshot) => {
+  return (dispatch,getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/websites`).once('value').then((snapshot) => {
       const websites = [];
 
       snapshot.forEach((childSnapshot) => {
@@ -54,8 +55,8 @@ export const removeWebsite = ({ id } = {}) => ({
 
 export const startRemoveWebsite = ({ id } = {}) => {
   return (dispatch, getState) => {
-  //  const uid = getState().auth.uid;
-    return database.ref(`websites/${id}`).remove().then(() => {
+   const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/websites/${id}`).remove().then(() => {
       dispatch(removeWebsite({ id }));
     });
   };
@@ -70,8 +71,8 @@ export const editWebsite = (id, updates) => ({
 
 export const startEditWebsite = (id, updates) => {
   return (dispatch, getState) => {
-  //  const uid = getState().auth.uid;
-    return database.ref(`websites/${id}`).update(updates).then(() => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/websites/${id}`).update(updates).then(() => {
       dispatch(editWebsite(id, updates));
     });
   };

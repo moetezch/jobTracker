@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
+//import moment from 'moment';
 import { startAddJob } from '../../actions/jobs'
 import {startSetWebsites} from '../../actions/websites'
 import country_list from '../../utils/countries'
-
+import validate from '../../utils/validateJob'
 
 
 
@@ -73,9 +74,10 @@ class NewJob extends Component {
     })
   }
   onSubmit = (job) => {
-    this.props.startAddJob(job)
-    console.log(job);
-    this.props.history.push('/jobs');
+
+   this.props.startAddJob(job)
+   // console.log(job);
+   this.props.history.push('/jobs');
 
   }
 
@@ -168,4 +170,5 @@ NewJob = connect(mapStateToProps, mapDispatchToProps)(NewJob)
 
 export default reduxForm({
   form: 'jobForm',
+  validate
 })(NewJob)

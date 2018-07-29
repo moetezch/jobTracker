@@ -46,7 +46,7 @@ class EditWebsite extends Component {
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting } = this.props
+    const { handleSubmit} = this.props
 
     return (
       <div>
@@ -67,13 +67,20 @@ class EditWebsite extends Component {
       label="URL"
     >
     </Field>
-    <div>
-    <button className="button is-primary" type="submit" >Update</button>
+    <div className="buttons">
+    <button className="button is-primary" type="submit" >
+     <span>Update</span>
+    <span className="icon is-small">
+      <i className="fas fa-sync"></i>
+    </span></button>
     <button className="button is-danger" onClick={() => {
       this.props.startRemoveWebsite({ id: this.props.website.id})
       this.props.history.push('/websites')
     }}>
-      Delete
+    <span>Delete</span>
+    <span className="icon is-small">
+      <i className="fas fa-times"></i>
+    </span>
   </button>
   </div>
   </form>
