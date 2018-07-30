@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import * as actions from '../../actions/jobs'
+import {startSetJobs} from '../../actions/jobs'
+import { startGetWebsite,startSetWebsites } from '../../actions/websites'
+import moment from 'moment'
+
 class JobsList extends Component {
 
   componentDidMount() {
     this.props.startSetJobs()
+    this.props.startSetWebsites()
+    
+ 
+
   }
 
   render() {
@@ -17,7 +24,7 @@ class JobsList extends Component {
         {
           this.props.jobs.length === 0 ? (
             <div className="">
-              <span>No Jobs</span>
+              <span>Hurry up and apply for a new job</span>
             </div>
           ) : (
             <table className="table is-striped is-hoverable is-fullwidth">
@@ -36,20 +43,28 @@ class JobsList extends Component {
             </tr>
           </thead>
             <tbody>
-            {  this.props.jobs.map((job,index) => {
-  
+          
+            {this.props.jobs.map((job,index) => {
               
+              let website = this.props.websites.filter(website=>website.id===job.foundOn)
+              // console.log(job.foundOn);
+              
+              // console.log(index);
+              
+            //  console.log(website[0].name);
+              
+             // this.props.startGetWebsite(job.fondOn)
                 return (
 
                   <tr key={job.id}>
                   <td>{index+1}</td>
-                  <td>{job.date}</td>
+                  <td>{moment.unix(job.date).format("MMMM D, YYYY")}</td>
                   <td>{job.jobTitle}</td>
                   <td>{job.company}</td>
                   <td>{job.country}</td>
-                  <td>{job.foundOn}</td>
-                  <td>{job.reply}</td>
-                  <td>{job.interview}</td>
+                  <td>{website[0] ?website[0].name : 'N/A'}</td>
+                  <td>{moment.unix(job.reply).isValid() ?moment.unix(job.reply).format("MMMM D, YYYY"):job.reply}</td>
+                  <td>{moment.unix(job.interview).isValid() ?moment.unix(job.interview).format("MMMM D, YYYY"):job.interview}</td>
                   <td>{job.notes}</td>
                   <td><Link className="button is-medium is-rounded is-light" to={`jobs/edit/${job.id}`}>Edit</Link></td>
               </tr>
@@ -65,11 +80,16 @@ class JobsList extends Component {
     );
   }
 }
-
+const mapDispatchToProps = (dispatch) => ({
+  startSetJobs :() => dispatch(startSetJobs()),
+  startSetWebsites :() => dispatch(startSetWebsites())
+ // startGetWebsite: (id)=> dispatch( startGetWebsite(id))
+});
 const mapStateToProps = (state) => {
   return {
-    jobs: state.jobs
+    jobs: state.jobs,
+    websites:state.websites
   }
 }
 
-export default connect(mapStateToProps, actions)(JobsList)
+export default connect(mapStateToProps, mapDispatchToProps)(JobsList)

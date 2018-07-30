@@ -20,7 +20,6 @@ const renderInput = ({ input, label, type, meta: { touched, error }, ...custom }
 class NewWebsite extends Component {
   onSubmit = (website) => {
     this.props.startAddWebsite(website)
-    console.log(website);
     this.props.history.push('/websites');
 
   }

@@ -69,7 +69,7 @@ export const startRemoveJob = ({ id } = {}) => {
   };
 };
 
-// EDIT_WEBSITE
+// EDIT_JOB
 export const editJob = (id, updates) => ({
   type: 'EDIT_JOB',
   id,

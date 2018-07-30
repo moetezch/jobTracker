@@ -41,7 +41,7 @@ export const startSetWebsites = () => {
           ...childSnapshot.val()
         });
       });
-
+      
       dispatch(setWebsites(websites));
     });
   };
@@ -74,6 +74,24 @@ export const startEditWebsite = (id, updates) => {
     const uid = getState().auth.uid;
     return database.ref(`users/${uid}/websites/${id}`).update(updates).then(() => {
       dispatch(editWebsite(id, updates));
+    });
+  };
+};
+
+// GET_WEBSITE
+export const getWebsite = (website) => ({
+  type: 'GET_WEBSITE',
+  website
+});
+
+export const startGetWebsite = (id) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/websites/${id}`).once('value').then((snapshot) => {
+      const website = snapshot.val() 
+      console.log(website);
+      
+      dispatch(getWebsite(website));
     });
   };
 };

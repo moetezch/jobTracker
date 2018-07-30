@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
-//import moment from 'moment';
+import moment from 'moment';
 import { startAddJob } from '../../actions/jobs'
 import { startSetWebsites } from '../../actions/websites'
 import country_list from '../../utils/countries'
@@ -69,14 +69,13 @@ class NewJob extends Component {
   }
   getWebsites() {
     return this.props.websites.map((website) => {
-      return (<option value={website.name} key={website.id}>{website.name}</option>)
+      return (<option value={website.id} key={website.id}>{website.name}</option>)
 
     })
   }
   onSubmit = (job) => {
-
-    this.props.startAddJob(job)
-    // console.log(job);
+    job.date= moment(job.date).unix()
+   this.props.startAddJob(job)
     this.props.history.push('/jobs');
 
   }
