@@ -12,14 +12,16 @@ export const startAddJob = (jobData={})=>{
     const {
       date = 0,
       jobTitle = '',
+      type='',
       company = '',
       country = '',
       foundOn = '',
+      link='',
       reply = 'Hopefully soon',
       interview = 'Not Yet',
       notes = '',
     }=jobData
-    const job ={date,jobTitle,company,country,foundOn,reply,interview,notes}
+    const job ={date,jobTitle,type,company,country,foundOn,link,reply,interview,notes}
     database.ref(`users/${uid}/jobs`).push(job).then((ref)=>{
       dispatch(addJob({
         id:ref.key,

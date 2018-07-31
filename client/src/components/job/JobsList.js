@@ -33,9 +33,11 @@ class JobsList extends Component {
               <th title="number">Number</th>
               <th title="date">Date</th>
               <th title="job title">Job Title</th>
+              <th title="type">Type</th>
               <th title="company">Company</th>
               <th title="Country">Country</th>
               <th title="found on">Found on</th>
+              <th title="job link">Link</th>
               <th title="reply">Reply</th>
               <th title="Interview">Interview</th>
               <th title="notes">Notes</th>
@@ -60,9 +62,11 @@ class JobsList extends Component {
                   <td>{index+1}</td>
                   <td>{moment.unix(job.date).format("MMMM D, YYYY")}</td>
                   <td>{job.jobTitle}</td>
+                  <td>{job.type}</td>
                   <td>{job.company}</td>
                   <td>{job.country}</td>
                   <td>{website[0] ?website[0].name : 'N/A'}</td>
+                  <td><a href={job.link} target="_blanc">Visit</a></td>
                   <td>{moment.unix(job.reply).isValid() ?moment.unix(job.reply).format("MMMM D, YYYY"):job.reply}</td>
                   <td>{moment.unix(job.interview).isValid() ?moment.unix(job.interview).format("MMMM D, YYYY"):job.interview}</td>
                   <td>{job.notes}</td>

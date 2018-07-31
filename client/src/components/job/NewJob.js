@@ -103,7 +103,19 @@ class NewJob extends Component {
               label="Date"
             >
             </Field>
-
+            <Field
+            name="type"
+            type="text"
+            component={renderSelect}
+            label="Type"
+          >
+           <option />
+              <option value="Full-time">Full-time</option>
+              <option value="part-time">Part-time</option>
+              <option value="contract"> Contract</option>
+              <option value="internship">Internship</option>
+              <option value="remote">Remote</option>
+          </Field>
             <Field
               name="company"
               type="text"
@@ -132,7 +144,13 @@ class NewJob extends Component {
               <option value="N/A">N/A</option>
               {this.getWebsites()}
             </Field>
-
+            <Field
+            name="link"
+            type="text"
+            component={renderInput}
+            label="Link"
+          >
+          </Field>
             <Field
               name="notes"
               type="text"

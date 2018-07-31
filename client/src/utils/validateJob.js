@@ -1,17 +1,24 @@
+import validUrl from 'valid-url'
 const validate = values => {
   const errors = {};
   const requiredFields = [
     'date',
     'jobTitle',
+    'type',
     'company',
     'country',
     'foundOn',
+    'link'
   ]
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = 'Required'
     }
   })
+  if (!(validUrl.isUri(values.link))) {
+    errors.link = 'Invalid URL';
+  }
+
   return errors;
 };
 

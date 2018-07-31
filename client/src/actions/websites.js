@@ -1,6 +1,5 @@
 import database from '../firebase/firebase'
 
-
 export const addWebsite = (website) => ({
   type: 'ADD_WEBSITE',
   website
@@ -56,9 +55,17 @@ export const removeWebsite = ({ id } = {}) => ({
 export const startRemoveWebsite = ({ id } = {}) => {
   return (dispatch, getState) => {
    const uid = getState().auth.uid;
-    return database.ref(`users/${uid}/websites/${id}`).remove().then(() => {
+   const query= database.ref(`users/${uid}/jobs/`).orderByChild("foundOn").equalTo(id)
+   query.once("value", function(snapshot) {
+     snapshot.forEach((childSnapshot)=> {
+       console.log(childSnapshot.val());
+       
+      childSnapshot.ref.update({ foundOn: "N/A" })
+    })
+        return database.ref(`users/${uid}/websites/${id}`).remove().then(() => {
       dispatch(removeWebsite({ id }));
     });
+  });
   };
 };
 
