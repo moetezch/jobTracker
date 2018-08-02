@@ -7,7 +7,7 @@ const Footer =()=>{
     <div className="container">
         <div className="content has-text-centered">
             <p>
-                <strong>Build</strong> with <span style={{color:'#8B0000'}}>❤️</span>  by <a href="https://moetez.me">Moetez</a>
+                <strong>Build</strong> with <span style={{color:'#8B0000'}} role="img" aria-label="love">❤️</span>  by <a href="https://moetez.me">Moetez</a>
             </p>
         </div>
     </div>

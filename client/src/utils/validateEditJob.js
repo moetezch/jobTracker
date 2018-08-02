@@ -1,8 +1,7 @@
 const validate = values => {
   const errors = {};
   const requiredFields = [
-    'reply',
-    'interview'
+    'reply'
   ]
   requiredFields.forEach(field => {
     if (!values[field]) {

@@ -4,23 +4,24 @@ import { connect } from 'react-redux'
 import {startSetJobs} from '../../actions/jobs'
 import { startGetWebsite,startSetWebsites } from '../../actions/websites'
 import moment from 'moment'
-
+import selectJobs from '../../selectors/jobs'
+import JobListFilters from './JobListFilters';
 class JobsList extends Component {
 
-  componentDidMount() {
-    this.props.startSetJobs()
-    this.props.startSetWebsites()
-    
- 
 
-  }
-
+  // componentDidMount() {
+  //   this.props.startSetJobs()
+  //   this.props.startSetWebsites()
+  // }
   render() {
     return (
+      
       <section className="section">
+      <JobListFilters />
       <div className="container">
     
         <Link className='button is-primary is-pulled-right' to="jobs/new"><i className="fas fa-plus"></i></Link>
+       
         {
           this.props.jobs.length === 0 ? (
             <div className="">
@@ -91,7 +92,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 const mapStateToProps = (state) => {
   return {
-    jobs: state.jobs,
+    jobs: selectJobs(state.jobs, state.filters),
+   // jobs:state.jobs,
     websites:state.websites
   }
 }

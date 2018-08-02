@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import {Modal} from 'react-bulma-components'
 import { reduxForm, Field } from 'redux-form'
 import { startEditJob, startSetJobs, startRemoveJob } from '../../actions/jobs'
 import moment from 'moment'
@@ -21,6 +22,7 @@ const renderInput = ({ input, label, type, meta: { touched, error }, ...custom }
 
 
 class EditJob extends Component {
+  state = { open: false }
   componentDidMount() {
     this.props.startSetJobs()
   }
@@ -71,15 +73,29 @@ class EditJob extends Component {
                   <i className="fas fa-sync"></i>
                 </span>
               </button>
-              <button className="button is-danger is-pulled-right" onClick={() => {
-                this.props.startRemoveJob({ id: this.props.job.id })
-                this.props.history.push('/jobs')
-              }}>
+              <button className="button is-danger is-pulled-right" type="button" onClick={() => this.setState({ open: true })}>
                 <span>Delete</span>
                 <span className="icon is-small">
                   <i className="fas fa-times"></i>
                 </span>
               </button>
+              <Modal show={this.state.open} onClose={() => this.setState({ open: false })} className="modal">
+              <div className="modal-background"></div>
+              <div className="modal-card">
+                <header className="modal-card-head">
+                  <p className="modal-card-title">Are you sure you want to delete this job ?</p>
+                </header>
+            
+                <footer className="modal-card-foot">
+                  <button className="button is-success" onClick={() => {
+                    this.props.startRemoveJob({ id: this.props.job.id })
+                    this.props.history.push('/jobs')
+                  }}>Confirm
+                  </button>
+                  <button className="button" onClick={() => this.setState({ open: false })}>Cancel</button>
+                </footer>
+              </div>
+              </Modal>
             </div>
 
           </form>
