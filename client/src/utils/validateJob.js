@@ -7,8 +7,7 @@ const validate = values => {
     'type',
     'company',
     'country',
-    'foundOn',
-    'link'
+    'foundOn'
   ]
   requiredFields.forEach(field => {
     if (!values[field]) {
