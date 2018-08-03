@@ -9,9 +9,14 @@ export const sortByDate = () => ({
   type: 'SORT_BY_DATE'
 });
 
-// SORT_BY_AMOUNT
+// SORT_BY_TITLE
 export const sortByTitle = () => ({
   type: 'SORT_BY_TITLE'
+});
+
+// SORT_BY_COUNTRY
+export const sortByCountry = () => ({
+  type: 'SORT_BY_COUNTRY'
 });
 
 // SET_START_DATE

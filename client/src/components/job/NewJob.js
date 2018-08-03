@@ -6,54 +6,18 @@ import { startAddJob } from '../../actions/jobs'
 import { startSetWebsites } from '../../actions/websites'
 import country_list from '../../utils/countries'
 import validate from '../../utils/validateJob'
+import renderDate from '../form/SingleDatePicker'
+import renderInput from '../form/RenderInput'
+import renderTextarea from '../form/RenderTextarea'
+import renderSelect from '../form/RenderSelect'
 
 
 
 
-const renderInput = ({ input, label, type, meta: { touched, error }, ...custom }) => (
 
-  <div className="field">
-    <label className="label">{label}</label>
-    <div className="control">
-      <input {...input} type={type} style={{ marginBottom: "5px" }} className="input" {...custom} />
-      <div className="has-text-danger" style={{ marginBottom: "20px" }}>
-        {touched && error && <span>{error}</span>}
-      </div>
-    </div>
-  </div>
-)
-const renderTextarea = ({ input, label, type, meta: { touched, error }, }) => (
-
-
-  <div className="field">
-    <label className="label">{label}</label>
-    <div className="control">
-      <textarea {...input} type={type} className="textarea" />
-      <div className="has-text-danger" style={{ marginBottom: "20px" }}>
-        {touched && error && <span>{error}</span>}
-      </div>
-    </div>
-  </div>
-)
-const renderSelect = ({ input, type, label, meta: { touched, error }, icon, ...custom }) => (
-
-  <div className="field">
-    <label className="label">{label}</label>
-    <div className="control  has-icons-left">
-      <div className="select">
-        <select  {...input} {...custom} />
-      </div>
-      <div className="icon is-small is-left">
-        <i className={icon}></i>
-      </div>
-    </div>
-    <div className="has-text-danger" style={{ marginBottom: "20px" }}>
-      {touched && error && <span>{error}</span>}
-    </div>
-  </div>
-)
 
 class NewJob extends Component {
+  
   componentDidMount() {
     this.props.startSetWebsites()
 
@@ -74,8 +38,8 @@ class NewJob extends Component {
     })
   }
   onSubmit = (job) => {
-    job.date= moment(job.date).unix()
-   this.props.startAddJob(job)
+    job.date = moment(job.date).unix()
+    this.props.startAddJob(job)
     this.props.history.push('/jobs');
 
   }
@@ -98,24 +62,27 @@ class NewJob extends Component {
             </Field>
             <Field
               name="date"
-              type="date"
-              component={renderInput}
+            
+              component={renderDate}
+              normalize={(data) => data && data.value && data.value.format()}
+              format={(value) => value ? moment(value) : undefined}
               label="Date"
             >
             </Field>
+
             <Field
-            name="type"
-            type="text"
-            component={renderSelect}
-            label="Type"
-          >
-           <option />
+              name="type"
+              type="text"
+              component={renderSelect}
+              label="Type"
+            >
+              <option />
               <option value="Full-time">Full-time</option>
               <option value="Part-time">Part-time</option>
               <option value="Contract"> Contract</option>
               <option value="Internship">Internship</option>
               <option value="Remote">Remote</option>
-          </Field>
+            </Field>
             <Field
               name="company"
               type="text"
@@ -141,16 +108,16 @@ class NewJob extends Component {
               icon="fas fa-location-arrow "
             >
               <option />
-              <option value="N/A">N/A</option>
               {this.getWebsites()}
+              <option value="Other">Other</option>
             </Field>
             <Field
-            name="link"
-            type="text"
-            component={renderInput}
-            label="Link"
-          >
-          </Field>
+              name="link"
+              type="text"
+              component={renderInput}
+              label="Link"
+            >
+            </Field>
             <Field
               name="notes"
               type="text"

@@ -60,7 +60,7 @@ export const startRemoveWebsite = ({ id } = {}) => {
      snapshot.forEach((childSnapshot)=> {
        console.log(childSnapshot.val());
        
-      childSnapshot.ref.update({ foundOn: "N/A" })
+      childSnapshot.ref.update({ foundOn: "Other" })
     })
         return database.ref(`users/${uid}/websites/${id}`).remove().then(() => {
       dispatch(removeWebsite({ id }));

@@ -27,6 +27,11 @@ export default (state = filtersReducerDefaultState, action) => {
         ...state,
         sortBy: 'date'
       };
+      case 'SORT_BY_COUNTRY':
+      return {
+        ...state,
+        sortBy: 'country'
+      };
     case 'SET_START_DATE':
       return {
         ...state,

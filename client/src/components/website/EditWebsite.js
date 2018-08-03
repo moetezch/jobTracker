@@ -5,18 +5,8 @@ import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import { startEditWebsite,startSetWebsites,startRemoveWebsite } from '../../actions/websites'
 import validate from '../../utils/validateWebsite'
-const renderInput = ({ input, label, type, meta: { touched, error }, ...custom }) => (
+import renderInput from '../form/RenderInput'
 
-  <div className="field">
-    <label className="label">{label}</label>
-    <div className="control">
-      <input {...input} type={type} style={{ marginBottom: "5px" }} className="input" {...custom} />
-      <div className="has-text-danger" style={{ marginBottom: "20px" }}>
-        {touched && error && <span>{error}</span>}
-      </div>
-    </div>
-  </div>
-)
 
 class EditWebsite extends Component {
   state = { open: false }

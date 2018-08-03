@@ -14,7 +14,7 @@ const validate = values => {
       errors[field] = 'Required'
     }
   })
-  if (!(validUrl.isUri(values.link))) {
+  if (values.link && !(validUrl.isUri(values.link))) {
     errors.link = 'Invalid URL';
   }
 

@@ -35,7 +35,9 @@ export default (jobs, { text, sortBy, startDate, endDate }) => {
     if (sortBy === 'date') {
       return a.date < b.date ? 1 : -1;
     } else if (sortBy === 'title') {
-      return a.title < b.title ? 1 : -1;
+      return a.jobTitle.toLowerCase() < b.jobTitle.toLowerCase() ? -1 : 1;
+    }else if (sortBy === 'country') {
+      return a.country < b.country ? -1 : 1;
     }
   });
 };

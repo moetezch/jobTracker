@@ -9,10 +9,10 @@ import JobListFilters from './JobListFilters';
 class JobsList extends Component {
 
 
-  // componentDidMount() {
-  //   this.props.startSetJobs()
-  //   this.props.startSetWebsites()
-  // }
+  componentDidMount() {
+    this.props.startSetJobs()
+    this.props.startSetWebsites()
+  }
   render() {
     return (
       
@@ -54,7 +54,7 @@ class JobsList extends Component {
               
               // console.log(index);
               
-            //  console.log(website[0].name);
+           //  console.log(website);
               
              // this.props.startGetWebsite(job.fondOn)
                 return (
@@ -66,8 +66,8 @@ class JobsList extends Component {
                   <td>{job.type}</td>
                   <td>{job.company}</td>
                   <td>{job.country}</td>
-                  <td>{website[0] ?website[0].name : 'N/A'}</td>
-                  <td><a href={job.link} target="_blanc">Visit</a></td>
+                  <td>{website[0] ?website[0].name : 'Other'}</td>
+                  <td>{job.link?<a href={job.link} target="_blanc">Visit</a>:''}</td>
                   <td>{moment.unix(job.reply).isValid() ?moment.unix(job.reply).format("MMMM D, YYYY"):job.reply}</td>
                   <td>{moment.unix(job.interview).isValid() ?moment.unix(job.interview).format("MMMM D, YYYY"):job.interview}</td>
                   <td>{job.notes}</td>

@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { DateRangePicker} from 'react-dates';
 import moment from 'moment'
-import { setTextFilter, sortByDate, sortByTitle, setStartDate, setEndDate } from '../../actions/filters';
+import { setTextFilter, sortByDate, sortByTitle,sortByCountry, setStartDate, setEndDate } from '../../actions/filters';
 
 
 
 class JobListFilters extends Component {
   componentDidMount() {
-   // console.log(this.props.filters);
+    //console.log(this.props.filters);
     
   }
 
@@ -17,11 +17,9 @@ class JobListFilters extends Component {
   };
   onDatesChange = ({ startDate, endDate }) => {
 
-   
-      this.props.setStartDate(startDate);
-    this.props.setEndDate(endDate);
-    
-
+      this.props.setStartDate(startDate)
+      this.props.setEndDate(endDate)
+  
     // if (startDate && endDate) {
     //   this.props.setStartDate(startDate);
     // this.props.setEndDate(endDate);
@@ -42,6 +40,9 @@ class JobListFilters extends Component {
       this.props.sortByDate();
     } else if (e.target.value === 'title') {
       this.props.sortByTitle();
+    }
+    else if (e.target.value === 'country') {
+      this.props.sortByCountry();
     }
   };
   
@@ -70,6 +71,7 @@ class JobListFilters extends Component {
           >
             <option value="date">Date</option>
             <option value="title">Job Title</option>
+            <option value="country">Country</option>
           </select>
         </div>
     </div>
@@ -108,6 +110,7 @@ const mapDispatchToProps = (dispatch) => ({
   setTextFilter: (text) => dispatch(setTextFilter(text)),
   sortByDate: () => dispatch(sortByDate()),
   sortByTitle: () => dispatch(sortByTitle()),
+  sortByCountry: () => dispatch(sortByCountry()),
   setStartDate: (startDate) => dispatch(setStartDate(startDate)),
   setEndDate: (endDate) => dispatch(setEndDate(endDate))
 });

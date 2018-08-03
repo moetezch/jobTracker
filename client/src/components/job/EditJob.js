@@ -6,19 +6,7 @@ import { reduxForm, Field } from 'redux-form'
 import { startEditJob, startSetJobs, startRemoveJob } from '../../actions/jobs'
 import moment from 'moment'
 import validate from '../../utils/validateEditJob'
-
-const renderInput = ({ input, label, type, meta: { touched, error }, ...custom }) => (
-
-  <div className="field">
-    <label className="label">{label}</label>
-    <div className="control">
-      <input {...input} type={type} style={{ marginBottom: "5px" }} className="input" {...custom} />
-      <div className="has-text-danger" style={{ marginBottom: "20px" }}>
-        {touched && error && <span>{error}</span>}
-      </div>
-    </div>
-  </div>
-)
+import renderDate from '../form/SingleDatePicker'
 
 
 class EditJob extends Component {
@@ -51,16 +39,18 @@ class EditJob extends Component {
           <form onSubmit={handleSubmit(this.onSubmit)}>
             <Field
               name="reply"
-              type="date"
-              component={renderInput}
+              component={renderDate}
               label="Date of first reply"
+              normalize={(data) => data && data.value && data.value.format()}
+              format={(value) => value ? moment(value) : undefined}
             >
             </Field>
             <Field
               name="interview"
-              type="date"
-              component={renderInput}
+              component={renderDate}
               label="Date of first Interview"
+              normalize={(data) => data && data.value && data.value.format()}
+              format={(value) => value ? moment(value) : undefined}
             >
             </Field>
 
@@ -79,23 +69,25 @@ class EditJob extends Component {
                   <i className="fas fa-times"></i>
                 </span>
               </button>
-              <Modal show={this.state.open} onClose={() => this.setState({ open: false })} className="modal">
-              <div className="modal-background"></div>
-              <div className="modal-card">
-                <header className="modal-card-head">
-                  <p className="modal-card-title">Are you sure you want to delete this job ?</p>
-                </header>
-            
-                <footer className="modal-card-foot">
-                  <button className="button is-success" onClick={() => {
-                    this.props.startRemoveJob({ id: this.props.job.id })
-                    this.props.history.push('/jobs')
-                  }}>Confirm
-                  </button>
-                  <button className="button" onClick={() => this.setState({ open: false })}>Cancel</button>
-                </footer>
-              </div>
-              </Modal>
+<div>
+<Modal show={this.state.open} onClose={() => this.setState({ open: false })} className="modal">
+<div className="modal-background"></div>
+<div className="modal-card">
+  <header className="modal-card-head">
+    <p className="modal-card-title">Are you sure you want to delete this job ?</p>
+  </header>
+
+  <footer className="modal-card-foot">
+    <button className="button is-success" onClick={() => {
+      this.props.startRemoveJob({ id: this.props.job.id })
+      this.props.history.push('/jobs')
+    }}>Confirm
+    </button>
+    <button className="button" onClick={() => this.setState({ open: false })}>Cancel</button>
+  </footer>
+</div>
+</Modal>
+</div>
             </div>
 
           </form>
