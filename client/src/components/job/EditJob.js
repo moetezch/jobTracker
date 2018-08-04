@@ -16,16 +16,16 @@ class EditJob extends Component {
   }
 
   onSubmit = ({ interview, reply }) => {
+
+    
     const job = {
       reply: moment(reply).unix(),
-      interview: moment(interview).unix()
+      interview: interview ? moment(interview).unix():'Not Yet'
     }
 
     this.props.startEditJob(this.props.match.params.id, job)
-    //console.log(moment(job.interview).unix());
 
-    //  console.log(job);
-    this.props.history.push('/jobs');
+  this.props.history.push('/jobs');
   }
 
   render() {

@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import { startAddWebsite } from '../../actions/websites'
@@ -19,6 +20,8 @@ class NewWebsite extends Component {
       
       <section className="section">
       <div className="container">
+      <Link className="button is-light" to="/websites"><i className="fas fa-arrow-left "></i></Link>
+
           <h2 className="is-size-2">New Job website </h2>
        <form onSubmit={handleSubmit(this.onSubmit)}>
       <Field

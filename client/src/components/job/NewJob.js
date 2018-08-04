@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import moment from 'moment';
@@ -51,6 +52,8 @@ class NewJob extends Component {
     return (
       <section className="section">
         <div className="container">
+        <Link className="button is-light" to="/jobs"><i className="fas fa-arrow-left "></i></Link>
+
           <h2 className="is-size-2">I applied for : </h2>
           <form onSubmit={handleSubmit(this.onSubmit)}>
             <Field

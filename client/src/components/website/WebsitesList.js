@@ -13,7 +13,6 @@ class WebsitesList extends Component {
     return (
       <section className="section">
       <div className="container">
-        <Link className='button is-primary is-pulled-right' to="websites/new"><i className="fas fa-plus"></i></Link>
        
           {
             this.props.websites.length === 0 ? (
@@ -21,6 +20,7 @@ class WebsitesList extends Component {
                 <span>No Websites</span>
               </div>
             ) : (
+              <div className="table-container">
                 <table className="table is-striped is-hoverable is-fullwidth">
                   <thead>
                     <tr>
@@ -52,10 +52,11 @@ class WebsitesList extends Component {
 
                   </tbody>
                 </table>
-
+                </div>
               )
           }
-        
+          <Link className='button is-primary is-pulled-right' to="websites/new"><i className="fas fa-plus"></i></Link>
+
       </div>
       </section>
     );

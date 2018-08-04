@@ -5,11 +5,13 @@ import {startSetJobs} from '../../actions/jobs'
 import { startGetWebsite,startSetWebsites } from '../../actions/websites'
 import moment from 'moment'
 import selectJobs from '../../selectors/jobs'
-import JobListFilters from './JobListFilters';
+import JobListFilters from './JobListFilters'
 class JobsList extends Component {
 
 
   componentDidMount() {
+    
+    
     this.props.startSetJobs()
     this.props.startSetWebsites()
   }
@@ -18,9 +20,10 @@ class JobsList extends Component {
       
       <section className="section">
       <JobListFilters />
+
+     
+     
       <div className="container">
-    
-        <Link className='button is-primary is-pulled-right' to="jobs/new"><i className="fas fa-plus"></i></Link>
        
         {
           this.props.jobs.length === 0 ? (
@@ -28,6 +31,11 @@ class JobsList extends Component {
               <span>Hurry up and apply for a new job</span>
             </div>
           ) : (
+            <div>
+            <h2 className="has-size-3">You Applied for <strong>{this.props.jobs.length}</strong> {this.props.jobs.length === 1 ? 'job' : 'jobs'}</h2>
+
+            
+            <div className="table-container">
             <table className="table is-striped is-hoverable is-fullwidth">
             <thead>
             <tr>
@@ -77,9 +85,12 @@ class JobsList extends Component {
               })}
               </tbody>
               </table>
+              </div>
+              </div>
             )
         }
-        
+        <Link className='button is-primary is-pulled-right' to="jobs/new"><i className="fas fa-plus"></i></Link>
+
       </div>
       </section>
     );

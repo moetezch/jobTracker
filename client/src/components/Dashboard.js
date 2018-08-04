@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import has from 'lodash/has';
+import _ from 'lodash';
 import { Line, Doughnut,Bar } from 'react-chartjs-2'
 import * as actions from '../actions/jobs'
 
@@ -9,7 +9,7 @@ import * as actions from '../actions/jobs'
 
 class Dashboard extends Component {
   componentDidMount() {
-
+    //this.props.startSetWebsites()
   }
 
   renderJobsPerWebsite() {
@@ -17,17 +17,33 @@ class Dashboard extends Component {
       (totals, job) => ({ ...totals, [job.foundOn]: (totals[job.foundOn] || 0) + 1 }),
       {}
     )
-    console.log(jobsPerWebsite);
+    // const repliesPerWebsite = this.props.jobs.reduce(
+    //   (totals, job) => ({ ...totals, [job.foundOn]: (totals[job.reply] || 0) + 1 }),
+    //   {}
+    // )
+       let repwebsite=[]
+        const repliesPerWebsite = this.props.jobs.map(job=>{
+          return {
+            'foundon':job.foundOn,
+            'reply':job.reply
+          }
+        })
+    console.log(repliesPerWebsite);
+    
+   console.log(jobsPerWebsite);
     var website = [], number = []
     for (var key in jobsPerWebsite) {
       if (jobsPerWebsite.hasOwnProperty(key)) {
-        website.push(key)
         number.push(jobsPerWebsite[key])
+       const websitename= this.props.websites.filter(website=>website.id===key)
+       websitename[0] ?key=websitename[0].name :key='Other'
+        website.push(key)
+       // number.push(jobsPerWebsite[key])
         //   console.log(key + " -> " + jobsPerWebsite[key]);
       }
     }
-    console.log(website);
-    console.log(number);
+   //console.log(website);
+    //console.log(number);
 
     const datamixed = {
       //labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -143,8 +159,8 @@ class Dashboard extends Component {
     
   
     return (
-      <div>
-        <h2 className="is-size-2">Number of jobs/replies/interviews per Website</h2>
+      <div className="container">
+        <h2 className="is-size-3">Number of jobs/replies/interviews per Website</h2>
         <Bar
         data={datamixed}
         options={options}
@@ -160,7 +176,7 @@ class Dashboard extends Component {
   render() {
     return (
       <section className="section">
-        <div className="container">
+        <div className="">
           Dashboard
           
           {this.renderJobsPerWebsite()}
@@ -173,7 +189,8 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    jobs: state.jobs
+    jobs: state.jobs,
+    websites:state.websites
   }
 }
 
