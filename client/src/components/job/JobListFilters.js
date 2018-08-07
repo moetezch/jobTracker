@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { DateRangePicker} from 'react-dates';
 import moment from 'moment'
-import { setTextFilter, sortByDate, sortByTitle,sortByCountry, setStartDate, setEndDate } from '../../actions/filters';
+import { setTextFilter,setCompanyFilter, sortByDate, sortByTitle,sortByCountry, setStartDate, setEndDate } from '../../actions/filters';
 
 
 
@@ -35,6 +35,9 @@ class JobListFilters extends Component {
   onTextChange = (e) => {
     this.props.setTextFilter(e.target.value);
   };
+  onCompanyTextChange = (e) => {
+    this.props.setCompanyFilter(e.target.value);
+  };
   onSortChange = (e) => {
     if (e.target.value === 'date') {
       this.props.sortByDate();
@@ -58,10 +61,19 @@ class JobListFilters extends Component {
           <input
             type="text"
             className="input is-primary"
-            placeholder="Search job title"
-            value={this.props.filters.text}
+            placeholder="Search Job"
+            value={this.props.filters.jobTitleText}
             onChange={this.onTextChange}
           />
+          </div>
+          <div className="control is-expanded">
+          <input
+          type="text"
+          className="input is-primary"
+          placeholder="Search Company"
+          value={this.props.filters.jobCompanyText}
+          onChange={this.onCompanyTextChange}
+        />
         </div>
         <div className="select">
           <select
@@ -108,6 +120,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setTextFilter: (text) => dispatch(setTextFilter(text)),
+  setCompanyFilter: (company) => dispatch(setCompanyFilter(company)),
   sortByDate: () => dispatch(sortByDate()),
   sortByTitle: () => dispatch(sortByTitle()),
   sortByCountry: () => dispatch(sortByCountry()),

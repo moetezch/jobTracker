@@ -40,7 +40,10 @@ class JobsList extends Component {
             <thead>
             <tr>
               <th title="number">Number</th>
-              <th title="date">Date</th>
+              <th title="date" onClick={()=>{
+                console.log('hi');
+                
+              }}>Date</th>
               <th title="job title">Job Title</th>
               <th title="type">Type</th>
               <th title="company">Company</th>

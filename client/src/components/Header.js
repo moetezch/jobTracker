@@ -15,8 +15,8 @@ const Header = ({ startLogout }) => {
       </Navbar.Brand>
       <Navbar.Menu>
         <Navbar.Container >
-          <NavLink to='/jobs' activeClassName="is-active" className=" navbar-item">Jobs</NavLink>
-          <NavLink to='/websites' activeClassName="is-active" className=" navbar-item">Websites</NavLink>
+          <NavLink to='/jobs' activeClassName="is-active" className=" navbar-item">Applied Jobs</NavLink>
+          <NavLink to='/websites' activeClassName="is-active" className=" navbar-item">Job Websites</NavLink>
         </Navbar.Container>
         <Navbar.Container position="end" >
           <Navbar.Item onClick={startLogout}>

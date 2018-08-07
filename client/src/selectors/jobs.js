@@ -2,7 +2,7 @@ import moment from 'moment'
 
 // Get visible jobs
 
-export default (jobs, { text, sortBy, startDate, endDate }) => {
+export default (jobs, { text,company, sortBy, startDate, endDate }) => {
   return jobs.filter((job) => {
 
     const createdAtMoment=moment.unix(job.date).format()
@@ -28,9 +28,9 @@ export default (jobs, { text, sortBy, startDate, endDate }) => {
     const startDateMatch = startDate ? moment(startDate).isSameOrBefore(createdAtMoment, 'day')  : true;
     const endDateMatch = endDate ? moment(endDate).isSameOrAfter(createdAtMoment, 'day'): true;
     const textMatch = job.jobTitle.toLowerCase().includes(text.toLowerCase());
-  
+    const companyMatch = job.company.toLowerCase().includes(company.toLowerCase());
     
-    return startDateMatch && endDateMatch && textMatch;
+    return startDateMatch && endDateMatch && textMatch && companyMatch
   }).sort((a, b) => {
     if (sortBy === 'date') {
       return a.date < b.date ? 1 : -1;

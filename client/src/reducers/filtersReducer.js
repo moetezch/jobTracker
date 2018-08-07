@@ -5,6 +5,7 @@ import moment from 'moment';
 
 const filtersReducerDefaultState = {
   text: '',
+  company:'',
   sortBy: 'date',
   startDate: moment().startOf('month'),
   endDate: moment().endOf('month')
@@ -16,6 +17,12 @@ export default (state = filtersReducerDefaultState, action) => {
       return {
         ...state,
         text: action.text
+      };
+      
+      case 'SET_COMPANY_FILTER':
+      return {
+        ...state,
+        company: action.company
       };
     case 'SORT_BY_TITLE':
       return {
