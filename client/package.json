@@ -12,6 +12,7 @@
     "react": "^16.4.1",
     "react-bulma-components": "^1.5.0",
     "react-chartjs-2": "^2.7.4",
+    "react-chartkick": "^0.2.1",
     "react-dates": "^17.1.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",

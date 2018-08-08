@@ -56,6 +56,7 @@ class NewJob extends Component {
 
           <h2 className="is-size-2">I applied for : </h2>
           <form onSubmit={handleSubmit(this.onSubmit)}>
+
             <Field
               name="jobTitle"
               type="text"
@@ -65,14 +66,12 @@ class NewJob extends Component {
             </Field>
             <Field
               name="date"
-            
               component={renderDate}
               normalize={(data) => data && data.value && data.value.format()}
               format={(value) => value ? moment(value) : undefined}
               label="Date"
             >
             </Field>
-
             <Field
               name="type"
               type="text"
@@ -86,6 +85,7 @@ class NewJob extends Component {
               <option value="Internship">Internship</option>
               <option value="Remote">Remote</option>
             </Field>
+
             <Field
               name="company"
               type="text"
@@ -101,7 +101,7 @@ class NewJob extends Component {
               icon="fas fa-globe"
             >
               <option />
-              <option value="other">Other</option>
+              <option value="Other">Other</option>
               {this.getCountries()}
             </Field>
             <Field

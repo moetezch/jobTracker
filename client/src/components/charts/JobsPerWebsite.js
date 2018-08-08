@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import * as actions from '../../actions/jobs'
 import {Bar} from 'react-chartjs-2'
 
 
-class jobsPerWebsite extends Component {
-  componentDidMount() {
-    this.props.startSetJobs()
-  }
+class JobsPerWebsite extends Component {
+
   renderJobsPerWebsite() {
     const jobsPerWebsite = this.props.jobs.reduce(
       (totals, job) => ({ ...totals, [job.foundOn]: (totals[job.foundOn] || 0) + 1 }),
@@ -24,9 +20,9 @@ class jobsPerWebsite extends Component {
             'reply':job.reply
           }
         })
-    console.log(repliesPerWebsite);
+    //console.log(repliesPerWebsite);
     
-   console.log(jobsPerWebsite);
+   //console.log(jobsPerWebsite);
     var website = [], number = []
     for (var key in jobsPerWebsite) {
       if (jobsPerWebsite.hasOwnProperty(key)) {
@@ -166,7 +162,7 @@ class jobsPerWebsite extends Component {
       </div>
     )
 
-    console.log(jobsPerWebsite);
+   // console.log(jobsPerWebsite);
   }
   render() {
     return (
@@ -177,11 +173,6 @@ class jobsPerWebsite extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    jobs: state.jobs,
-    websites:state.websites
-  }
-}
 
-export default connect(mapStateToProps, actions)(jobsPerWebsite)
+
+export default JobsPerWebsite
