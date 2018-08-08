@@ -101,6 +101,7 @@ class NewJob extends Component {
               icon="fas fa-globe"
             >
               <option />
+              <option value="other">Other</option>
               {this.getCountries()}
             </Field>
             <Field
