@@ -11,6 +11,8 @@ const renderDate = ({ input, meta,label }) => (
       onDateChange={value => input.onChange({ value })}
       onFocusChange={({ focused }) => focused ? input.onFocus(true) : input.onBlur(true)}
       isOutsideRange={() => false}
+      withPortal
+      readOnly={true}
     />
     <div className="has-text-danger" style={{ marginBottom: "20px" }}>
       {meta.touched && meta.error && <span>{meta.error}</span>}

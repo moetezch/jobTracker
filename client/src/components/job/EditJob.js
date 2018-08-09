@@ -34,7 +34,7 @@ class EditJob extends Component {
     return (
       <section className="section">
         <div className="container">
-          <Link className="button is-light" to="/jobs"><i className="fas fa-arrow-left "></i></Link>
+          <Link className="button is-light" to="/jobs/applied"><i className="fas fa-arrow-left "></i></Link>
           <h2 className="is-size-2">{this.props.job.jobTitle} @ {this.props.job.company}</h2>
           <form onSubmit={handleSubmit(this.onSubmit)}>
             <Field
@@ -71,7 +71,6 @@ class EditJob extends Component {
               </button>
 <div>
 <Modal show={this.state.open} onClose={() => this.setState({ open: false })} className="modal">
-<div className="modal-background"></div>
 <div className="modal-card">
   <header className="modal-card-head">
     <p className="modal-card-title">Are you sure you want to delete this job ?</p>
@@ -104,7 +103,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  startEditJob: (id, website) => dispatch(startEditJob(id, website)),
+  startEditJob: (id, job) => dispatch(startEditJob(id, job)),
   startSetJobs: () => dispatch(startSetJobs()),
   startRemoveJob: (id) => dispatch(startRemoveJob(id))
 });

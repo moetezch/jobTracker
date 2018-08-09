@@ -41,7 +41,7 @@ class NewJob extends Component {
   onSubmit = (job) => {
     job.date = moment(job.date).unix()
     this.props.startAddJob(job)
-    this.props.history.push('/jobs');
+    this.props.history.push('/jobs/applied');
 
   }
 

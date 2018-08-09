@@ -6,7 +6,10 @@ import createHistory from 'history/createBrowserHistory'
 import Dashboard from '../components/Dashboard'
 import Login from '../components/Login'
 import NotFoundPage from '../components/NotFoundPage'
-import JobList from '../components/job/JobsList'
+import AppliedJobs from '../components/job/AppliedJobs'
+import RepliedJobs from '../components/job/RepliedJobs'
+import InterviewingJobs from '../components/job/InterviewingJobs'
+import ArchivedJobs from '../components/job/ArchivedJobs'
 import WebsitesList from '../components/website/WebsitesList'
 import NewWebsite from '../components/website/NewWebsite'
 import NewJob from '../components/job/NewJob'
@@ -31,7 +34,10 @@ class AppRouter extends Component {
          
           <PublicRoute exact path="/" component={Login} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute exact path="/jobs" component={JobList} />
+          <PrivateRoute exact path="/jobs/applied" component={AppliedJobs} />
+          <PrivateRoute exact path="/jobs/replied" component={RepliedJobs} />
+          <PrivateRoute exact path="/jobs/interviewing" component={InterviewingJobs} />
+          <PrivateRoute exact path="/jobs/archived" component={ArchivedJobs} />
           <PrivateRoute path="/jobs/new" component={NewJob} />
           <PrivateRoute path="/jobs/edit/:id" component={EditJob} />
           <PrivateRoute exact path="/websites" component={WebsitesList} />

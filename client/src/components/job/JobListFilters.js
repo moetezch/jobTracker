@@ -8,7 +8,7 @@ import { setTextFilter,setCompanyFilter, sortByDate, sortByTitle,sortByCountry, 
 
 class JobListFilters extends Component {
   componentDidMount() {
-    //console.log(this.props.filters);
+   // console.log(this.props.filters);
     
   }
 
@@ -97,7 +97,7 @@ class JobListFilters extends Component {
     startDateId="start"
     endDate={moment(this.props.filters.endDate)}
     endDateId="end"
-    // startDate={this.props.filters.startDate}
+    //startDate={this.props.filters.startDate}
     // startDateId="start"
     // endDate={this.props.filters.endDate}
     // endDateId="end"
@@ -107,6 +107,9 @@ class JobListFilters extends Component {
     showClearDates={false}
     numberOfMonths={1}
     isOutsideRange={() => false}
+    readOnly={true}
+    withPortal
+    minimumNights={0}
   />
   </div>
   </div>

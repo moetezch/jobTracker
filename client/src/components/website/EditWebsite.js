@@ -75,7 +75,6 @@ class EditWebsite extends Component {
     </span>
   </button>
   <Modal show={this.state.open} onClose={() => this.setState({ open: false })} className="modal">
-  <div className="modal-background"></div>
   <div className="modal-card">
     <header className="modal-card-head">
       <p className="modal-card-title">Are you sure you want to delete this website ?</p>
