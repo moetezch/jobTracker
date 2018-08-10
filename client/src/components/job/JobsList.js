@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import { Link,Redirect } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { startSetJobs, startEditJob } from '../../actions/jobs'
 import { startSetWebsites } from '../../actions/websites'
 import moment from 'moment'
-import { Dropdown,Modal } from 'react-bulma-components'
+import {Modal } from 'react-bulma-components'
 import selectJobs from '../../selectors/jobs'
 import JobListFilters from './JobListFilters'
-import RenderDate from '../form/SingleDatePicker'
 import { SingleDatePicker } from "react-dates"
 class JobsList extends Component {
   state = { replyOpen: false, interviewOpen: false,jobID:0 }

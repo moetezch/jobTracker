@@ -25,7 +25,7 @@ class JobsPerCountry extends Component {
     return (
       
       <div>
-        <h2>Jobs Applied per Country</h2>
+        <h2 className="is-size-3">Jobs/Country</h2>
         <div>
           {this.renderJobsPerCountry()}
         </div>

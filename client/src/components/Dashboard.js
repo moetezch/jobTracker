@@ -9,17 +9,18 @@ import selectJobs from '../selectors/jobs'
 
 class Dashboard extends Component {
   componentDidMount() {
-    this.props.startSetJobs()    
+    this.props.startSetJobs()
+
   }
 
   render() {
     return (
       <section className="section">
         <div className="container">
-        <JobChartFilters/>
-          <JobsPerWebsite jobs={this.props.jobs} websites={this.props.websites}/>
-          <JobsPerCountry jobs={this.props.jobs}/>
-          <AppliedJobsPerDay jobs={this.props.jobs}/>
+          <JobChartFilters />
+          <AppliedJobsPerDay jobs={this.props.jobs} filters={this.props.filters} />
+          <JobsPerWebsite jobs={this.props.jobs} websites={this.props.websites} />
+          <JobsPerCountry jobs={this.props.jobs} />
         </div>
       </section>
     );
@@ -29,8 +30,9 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    jobs:selectJobs(state.jobs, state.filters),
-    websites:state.websites
+    jobs: selectJobs(state.jobs, state.filters),
+    websites: state.websites,
+    filters: state.filters
   }
 }
 

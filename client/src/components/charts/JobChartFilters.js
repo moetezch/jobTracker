@@ -52,6 +52,9 @@ state = {
     showClearDates={false}
     numberOfMonths={1}
     isOutsideRange={() => false}
+    readOnly={true}
+    withPortal
+    minimumNights={0}
   />
   </div>
   </div>

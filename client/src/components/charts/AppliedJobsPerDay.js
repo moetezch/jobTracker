@@ -1,37 +1,40 @@
 import React, { Component } from 'react'
-
 import { Line } from 'react-chartjs-2'
 import moment from 'moment'
 
-
 class AppliedJobsPerDay extends Component {
 
-  renderJobsPerDay (){
+  renderJobsPerDay() {
+    const totalDays = [], numberOfJobs = [];
+    for (var m = moment(this.props.filters.startDate); m.diff(this.props.filters.endDate, 'days') <= 0; m.add(1, 'days')) {
+      totalDays.push(m.format("MMMM D, YYYY"))
+    }
     const jobsPerDay = this.props.jobs.reduce(
       (totals, job) => ({ ...totals, [job.date]: (totals[job.date] || 0) + 1 }),
       {}
     )
-    var days = [], number = []
+    const days = [], number = []
     for (var key in jobsPerDay) {
       if (jobsPerDay.hasOwnProperty(key)) {
         days.push(moment.unix(key).format("MMMM D, YYYY"))
         number.push(jobsPerDay[key])
       }
     }
+    let count = 0
+    for (let i = 0; i < totalDays.length; i++) {
 
-    
-    // const data = {
-    //   labels: country,
-    //   datasets: [{
-    //     data: number,
-    //     backgroundColor
-    //   }]
-    // };
+      if (totalDays[i] == days[count]) {
+        numberOfJobs.push(number[count])
+        count++
+      } else {
+        numberOfJobs.push(0)
+      }
+    }
     const data = {
-      labels: days,
+      labels: totalDays,
       datasets: [
         {
-          label: 'Number of Applied jobs',
+          label: 'Number of applied jobs',
           fill: false,
           lineTension: 0.1,
           backgroundColor: 'rgba(75,192,192,0.4)',
@@ -49,7 +52,7 @@ class AppliedJobsPerDay extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: number
+          data: numberOfJobs
         }
       ]
     };
@@ -60,13 +63,11 @@ class AppliedJobsPerDay extends Component {
   render() {
     return (
       <div>
-        <h2>Applied jobs per day</h2>
+        <h2 className="is-size-3">Applied jobs/day</h2>
         {this.renderJobsPerDay()}
       </div>
     )
   }
 }
-
-
 
 export default AppliedJobsPerDay
