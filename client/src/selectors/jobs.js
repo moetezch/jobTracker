@@ -28,6 +28,7 @@ export default (jobs, { text,company, sortBy, startDate, endDate }) => {
     const startDateMatch = startDate ? moment(startDate).isSameOrBefore(createdAtMoment, 'day')  : true;
     const endDateMatch = endDate ? moment(endDate).isSameOrAfter(createdAtMoment, 'day'): true;
     const textMatch = job.jobTitle.toLowerCase().includes(text.toLowerCase());
+    
     const companyMatch = job.company.toLowerCase().includes(company.toLowerCase());
     
     return startDateMatch && endDateMatch && textMatch && companyMatch

@@ -22,7 +22,18 @@ export const startAddJob = (jobData={})=>{
       notes = '',
       status='applied'
     }=jobData
+    const query= database.ref(`users/${uid}/jobs/`)
+    query.once("value", function(snapshot) {
+      snapshot.forEach((childSnapshot)=> {
+       // console.log(childSnapshot.val());
+        
+       childSnapshot.ref.update({ status: "applied" })
+     })
+     });
+
+
     const job ={date,jobTitle,type,company,country,foundOn,link,reply,interview,notes,status}
+
     database.ref(`users/${uid}/jobs`).push(job).then((ref)=>{
       dispatch(addJob({
         id:ref.key,
