@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link,Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { startSetJobs, startEditJob } from '../../actions/jobs'
 import { startSetWebsites } from '../../actions/websites'
@@ -10,7 +10,7 @@ import JobListFilters from './JobListFilters'
 import RenderDate from '../form/SingleDatePicker'
 import { SingleDatePicker } from "react-dates"
 class JobsList extends Component {
-  state = { replyOpen: false, interviewOpen: false }
+  state = { replyOpen: false, interviewOpen: false,jobID:0 }
 
   componentDidMount() {
 
@@ -58,7 +58,7 @@ class JobsList extends Component {
                           <th title="Interview">Interview</th>
                           <th title="notes">Notes</th>
 
-                          <th title="edit"></th>
+                          <th title="edit">Edit</th>
                           <th title="status">Status</th>
                         </tr>
                       </thead>
@@ -93,17 +93,17 @@ class JobsList extends Component {
                               <td>{job.notes}</td>
                               <td><Link className="button is-medium is-rounded is-light" to={`/jobs/edit/${job.id}`}>Edit</Link></td>
                               <td>
+                              {
+                                (job.status==='applied' || job.status==='interviewing')?
+                               (
+                                <div>
                                 <button className="button"
-                                  onClick={() => this.setState({ replyOpen: true })}
-
+                                onClick={() =>this.setState({ replyOpen: true,jobID:job.id })}  
                                 >
                                   Got a reply?
                                 </button>
                                 <button className="button"
-                                onClick={() => this.setState({ interviewOpen: true })}
-                              
-
-
+                                onClick={() =>this.setState({ interviewOpen: true,jobID:job.id })}                         
                                 >
                                   Got an interview?
                                 </button>
@@ -111,10 +111,27 @@ class JobsList extends Component {
                                   onClick={() => {
                                     job.status = "archived"
                                     this.props.startEditJob(job.id, job)
-
                                     this.props.startSetJobs()
                                   }}
                                 >Archive</button>
+                                </div>
+                                )
+                                :
+
+                                (
+                                  <div>
+                                  <button className="button"
+                                    onClick={() => {
+                                      job.status = "applied"
+                                      this.props.startEditJob(job.id, job)
+                                      this.props.startSetJobs()
+                                    }}
+                                  >Unarchive</button>
+                                  </div>
+                                  )
+                                
+                              }
+
                               </td>
 
                             </tr>
@@ -127,26 +144,35 @@ class JobsList extends Component {
                       <Modal show={this.state.replyOpen} onClose={() => this.setState({ replyOpen: false })} className="modal">
                       <div className="modal-card">
                         <header className="modal-card-head">
-                          <p className="modal-card-title">When do you get your first reply?</p>
+                          <p className="modal-card-title">When did you get your first reply?</p>
                         </header>
                         <div className="modal-card">
                         <section className="modal-card-body" style={{height:'500px'}}>
                         <SingleDatePicker
-                        date={this.state.date} // momentPropTypes.momentObj or null
-                        onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
-                        focused={true} // PropTypes.bool
-                        onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
-                        id="your_unique_id" // PropTypes.string.isRequired,
+                        date={this.state.date} 
+                        onDateChange={date => {
+                          this.setState({ date })
+                          //console.log(date)
+                        }}
+                        focused={true} 
+                        onFocusChange={({ focused }) => this.setState({ focused })} 
+                        id="reply"
                         numberOfMonths={1}
                         readOnly={true}
                       />
                       </section>
                       <footer className="modal-card-foot">
-                      <button className="button is-success">Save changes</button>
-                      <button className="button">Cancel</button>
+                      <button className="button is-success" onClick={() =>{
+                        const job={
+                          reply: moment(this.state.date).unix()
+                        }
+                       this.props.startEditJob(this.state.jobID, job)
+                       this.props.startSetJobs()
+                       this.setState({ replyOpen: false })
+                      }} >Save</button>
+                      <button className="button" onClick={() => this.setState({ replyOpen: false })}>Cancel</button>
                     </footer>
-                      </div>
-                       
+                      </div>                      
                       </div>
                       </Modal>
                     </div>
@@ -156,9 +182,34 @@ class JobsList extends Component {
                       <header className="modal-card-head">
                         <p className="modal-card-title">When is your interview?</p>
                       </header>
-
-                        
-                     
+                      <div className="modal-card">
+                      <section className="modal-card-body" style={{height:'500px'}}>
+                      <SingleDatePicker
+                      date={this.state.date} 
+                      onDateChange={date => {
+                        this.setState({ date })
+                        //console.log(date)
+                      }}
+                      focused={true} 
+                      onFocusChange={({ focused }) => this.setState({ focused })} 
+                      id="interview"
+                      numberOfMonths={1}
+                      readOnly={true}
+                    />
+                    </section>
+                    <footer className="modal-card-foot">
+                    <button className="button is-success" onClick={() =>{
+                      const job={
+                        interview: moment(this.state.date).unix(),
+                        status:"interviewing"
+                      }
+                     this.props.startEditJob(this.state.jobID, job)
+                     this.props.startSetJobs()
+                     this.setState({ interviewOpen: false })
+                    }} >Save</button>
+                    <button className="button" onClick={() => this.setState({ interviewOpen: false })}>Cancel</button>
+                  </footer>
+                    </div>   
                     </div>
                     </Modal>
                   </div>

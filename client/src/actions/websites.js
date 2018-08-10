@@ -57,9 +57,7 @@ export const startRemoveWebsite = ({ id } = {}) => {
    const uid = getState().auth.uid;
    const query= database.ref(`users/${uid}/jobs/`).orderByChild("foundOn").equalTo(id)
    query.once("value", function(snapshot) {
-     snapshot.forEach((childSnapshot)=> {
-      // console.log(childSnapshot.val());
-       
+     snapshot.forEach((childSnapshot)=> {       
       childSnapshot.ref.update({ foundOn: "Other" })
     })
         return database.ref(`users/${uid}/websites/${id}`).remove().then(() => {
