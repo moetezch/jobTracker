@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { DateRangePicker} from 'react-dates';
 import moment from 'moment'
-import {setStartDate, setEndDate } from '../../actions/filters';
+import {setChartStartDate, setChartEndDate } from '../../actions/chartFilters';
 
 
 
@@ -12,8 +12,8 @@ state = {
   };
   onDatesChange = ({ startDate, endDate }) => {
 
-      this.props.setStartDate(startDate)
-      this.props.setEndDate(endDate)
+      this.props.setChartStartDate(startDate)
+      this.props.setChartEndDate(endDate)
   
     // if (startDate && endDate) {
     //   this.props.setStartDate(startDate);
@@ -38,13 +38,13 @@ state = {
     // startDateId="start" //
     // endDate={moment()}
     // endDateId="end"
-    startDate={moment(this.props.filters.startDate)}
+    startDate={moment(this.props.chartFilters.startDate)}
     startDateId="start"
-    endDate={moment(this.props.filters.endDate)}
+    endDate={moment(this.props.chartFilters.endDate)}
     endDateId="end"
-    // startDate={this.props.filters.startDate}
+    // startDate={this.props.chartFilters.startDate}
     // startDateId="start"
-    // endDate={this.props.filters.endDate}
+    // endDate={this.props.chartFilters.endDate}
     // endDateId="end"
     onDatesChange={this.onDatesChange}
     focusedInput={this.state.calendarFocused}
@@ -63,12 +63,12 @@ state = {
 }
 
 const mapStateToProps = (state) => ({
-  filters: state.filters
+  chartFilters: state.chartsFilter
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setStartDate: (startDate) => dispatch(setStartDate(startDate)),
-  setEndDate: (endDate) => dispatch(setEndDate(endDate))
+  setChartStartDate: (startDate) => dispatch(setChartStartDate(startDate)),
+  setChartEndDate: (endDate) => dispatch(setChartEndDate(endDate))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(JobChartFilters);

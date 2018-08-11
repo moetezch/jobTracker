@@ -5,7 +5,7 @@ import JobChartFilters from './charts/JobChartFilters'
 import JobsPerCountry from './charts/JobsPerCountry'
 import JobsPerWebsite from './charts/JobsPerWebsite'
 import AppliedJobsPerDay from './charts/AppliedJobsPerDay'
-import selectJobs from '../selectors/jobs'
+import selectJobs from '../selectors/charJobs'
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -30,9 +30,9 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    jobs: selectJobs(state.jobs, state.filters),
+    jobs: selectJobs(state.jobs, state.chartsFilter),
     websites: state.websites,
-    filters: state.filters
+    filters: state.chartsFilter
   }
 }
 

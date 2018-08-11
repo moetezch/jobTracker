@@ -8,6 +8,8 @@ import websitesReducer from '../reducers/websitesReducer'
 import authReducer from '../reducers/authReducer'
 import filtersReducer from '../reducers/filtersReducer'
 import bookmarksReducer from '../reducers/bookmarksReducer'
+import chartsReducer from '../reducers/chartsReducer'
+
 const persistConfig = {
   key: 'root',
   storage,
@@ -18,7 +20,8 @@ const persistedReducer = persistReducer(persistConfig,combineReducers({
   auth: authReducer,
   form:formReducer,
   filters: filtersReducer,
-  bookmarks:bookmarksReducer
+  bookmarks:bookmarksReducer,
+  chartsFilter:chartsReducer
 }))
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

@@ -62,7 +62,7 @@ class JobListFilters extends Component {
             type="text"
             className="input is-primary"
             placeholder="Search Job"
-            value={this.props.filters.jobTitleText}
+            value={this.props.filters.text}
             onChange={this.onTextChange}
           />
           </div>
@@ -71,7 +71,7 @@ class JobListFilters extends Component {
           type="text"
           className="input is-primary"
           placeholder="Search Company"
-          value={this.props.filters.jobCompanyText}
+          value={this.props.filters.company}
           onChange={this.onCompanyTextChange}
         />
         </div>
