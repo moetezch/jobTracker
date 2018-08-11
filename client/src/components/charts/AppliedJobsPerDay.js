@@ -63,7 +63,7 @@ class AppliedJobsPerDay extends Component {
   render() {
     return (
       <div>
-        <h2 className="is-size-3">Applied jobs/day</h2>
+        <h2 className="is-size-3">Applied Jobs/Day</h2>
         {this.renderJobsPerDay()}
       </div>
     )

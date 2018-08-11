@@ -7,6 +7,7 @@ import jobsReducer from '../reducers/jobsReducer'
 import websitesReducer from '../reducers/websitesReducer'
 import authReducer from '../reducers/authReducer'
 import filtersReducer from '../reducers/filtersReducer'
+import bookmarksReducer from '../reducers/bookmarksReducer'
 const persistConfig = {
   key: 'root',
   storage,
@@ -17,6 +18,7 @@ const persistedReducer = persistReducer(persistConfig,combineReducers({
   auth: authReducer,
   form:formReducer,
   filters: filtersReducer,
+  bookmarks:bookmarksReducer
 }))
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

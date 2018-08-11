@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {Bar} from 'react-chartjs-2'
 
-
 class JobsPerWebsite extends Component {
 
   renderJobsPerWebsite() {
@@ -9,40 +8,44 @@ class JobsPerWebsite extends Component {
       (totals, job) => ({ ...totals, [job.foundOn]: (totals[job.foundOn] || 0) + 1 }),
       {}
     )
-    // const repliesPerWebsite = this.props.jobs.reduce(
-    //   (totals, job) => ({ ...totals, [job.foundOn]: (totals[job.reply] || 0) + 1 }),
-    //   {}
-    // )
-       let repwebsite=[]
-        const repliesPerWebsite = this.props.jobs.map(job=>{
-          return {
-            'foundon':job.foundOn,
-            'reply':job.reply
-          }
-        })
-    //console.log(repliesPerWebsite);
     
-   //console.log(jobsPerWebsite);
-    var website = [], number = []
+    const repliesPerWebsite = this.props.jobs.reduce(
+      (totals, job) => ({ ...totals, [job.foundOn]:job.reply!=='Hopefully soon' ?((totals[job.foundOn] || 0) + 1):totals[job.foundOn]||0}),
+      {}
+    )
+    
+    const interviewsPerWebsite = this.props.jobs.reduce(
+      (totals, job) => ({ ...totals, [job.foundOn]:job.interview!=='Not Yet' ?((totals[job.foundOn] || 0) + 1):totals[job.foundOn]||0}),
+      {}
+    )
+
+    var websites = [], jobsNumber = [], repliesNumber=[], interviewsNumber=[]
     for (var key in jobsPerWebsite) {
       if (jobsPerWebsite.hasOwnProperty(key)) {
-        number.push(jobsPerWebsite[key])
+        jobsNumber.push(jobsPerWebsite[key])
        const websitename= this.props.websites.filter(website=>website.id===key)
        websitename[0] ?key=websitename[0].name :key='Other'
-        website.push(key)
-       // number.push(jobsPerWebsite[key])
-        //   console.log(key + " -> " + jobsPerWebsite[key]);
+        websites.push(key)
+
       }
     }
-   //console.log(website);
-    //console.log(number);
+    for (var key in repliesPerWebsite) {
+      if (repliesPerWebsite.hasOwnProperty(key)) {
+        repliesNumber.push(repliesPerWebsite[key])
+      }
+    }
+    for (var key in interviewsPerWebsite) {
+      if (interviewsPerWebsite.hasOwnProperty(key)) {
+        interviewsNumber.push(interviewsPerWebsite[key])
+      }
+    }
+
 
     const datamixed = {
-      //labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [{
           label: 'Replies',
           type:'line',
-          data: [1,1,0],
+          data: repliesNumber,
           fill: false,
           borderColor: '#EC932F',
           backgroundColor: '#EC932F',
@@ -55,7 +58,7 @@ class JobsPerWebsite extends Component {
         {
           label: 'Interviews',
           type:'line',
-          data: [2,0,1],
+          data: interviewsNumber,
           fill: false,
           borderColor: '#2e94ba',
           backgroundColor: '#2e94ba',
@@ -69,7 +72,7 @@ class JobsPerWebsite extends Component {
         {
           type: 'bar',
           label: 'Jobs',
-          data: number,
+          data: jobsNumber,
           fill: false,
           backgroundColor: '#71B37C',
           borderColor: '#71B37C',
@@ -97,7 +100,7 @@ class JobsPerWebsite extends Component {
             gridLines: {
               display: false
             },
-            labels: website,
+            labels: websites,
           }
         ],
         yAxes: [
@@ -152,7 +155,7 @@ class JobsPerWebsite extends Component {
   
     return (
       <div className="">
-        <h2 className="is-size-3">Number of jobs/replies/interviews per Website</h2>
+        <h2 className="is-size-3">Jobs/Replies/Interviews per Website</h2>
         <Bar
         data={datamixed}
         options={options}

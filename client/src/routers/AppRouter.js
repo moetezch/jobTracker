@@ -9,6 +9,8 @@ import NotFoundPage from '../components/NotFoundPage'
 import AppliedJobs from '../components/job/AppliedJobs'
 import InterviewingJobs from '../components/job/InterviewingJobs'
 import ArchivedJobs from '../components/job/ArchivedJobs'
+import BookmarkedJobs from '../components/job/BookmarkedJobs'
+import NewBookmark from '../components/job/NewBookmark'
 import WebsitesList from '../components/website/WebsitesList'
 import NewWebsite from '../components/website/NewWebsite'
 import NewJob from '../components/job/NewJob'
@@ -33,9 +35,11 @@ class AppRouter extends Component {
          
           <PublicRoute exact path="/" component={Login} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute exact path="/jobs/applied" component={AppliedJobs} />
-          <PrivateRoute exact path="/jobs/interviewing" component={InterviewingJobs} />
-          <PrivateRoute exact path="/jobs/archived" component={ArchivedJobs} />
+          <PrivateRoute path="/jobs/applied" component={AppliedJobs} />
+          <PrivateRoute path="/jobs/interviewing" component={InterviewingJobs} />
+          <PrivateRoute path="/jobs/archived" component={ArchivedJobs} />
+          <PrivateRoute exact path="/jobs/bookmarks" component={BookmarkedJobs} />
+          <PrivateRoute path="/jobs/bookmarks/new" component={NewBookmark} />
           <PrivateRoute path="/jobs/new" component={NewJob} />
           <PrivateRoute path="/jobs/edit/:id" component={EditJob} />
           <PrivateRoute exact path="/websites" component={WebsitesList} />

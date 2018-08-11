@@ -10,7 +10,12 @@ class Header extends Component {
     <Navbar color="primary">
       <Navbar.Brand >
         <NavLink to="/dashboard" className="navbar-item" activeClassName="is-active">
-          Job Hunt Tracker
+        <img
+        src="/images/sitelogo.png"
+        alt="Jobyzer"
+        width="100"
+        height="52"
+      />
     </NavLink>
         <Navbar.Burger />
       </Navbar.Brand>
@@ -22,6 +27,7 @@ class Header extends Component {
             <NavLink to='/jobs/applied' activeClassName="is-active" className=" navbar-item">Applied</NavLink>
             <NavLink to='/jobs/interviewing' activeClassName="is-active" className=" navbar-item">Interviewing</NavLink>
             <NavLink to='/jobs/archived' activeClassName="is-active" className=" navbar-item">Archived</NavLink>
+            <NavLink to='/jobs/bookmarks' activeClassName="is-active" className=" navbar-item">Bookmarks</NavLink>
             </Navbar.Dropdown>
           </Navbar.Item>
           <NavLink to='/websites' activeClassName="is-active" className=" navbar-item">Job Websites</NavLink>
