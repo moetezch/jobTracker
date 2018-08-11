@@ -12,10 +12,6 @@ class JobsList extends Component {
   state = { replyOpen: false, interviewOpen: false,jobID:0 }
 
   componentDidMount() {
-
-
-
-
     this.props.startSetJobs()
     this.props.startSetWebsites()
   }
@@ -29,6 +25,7 @@ class JobsList extends Component {
 
 
         <div className="container">
+        <Link className='button is-primary is-pulled-right' to="/jobs/new"><i className="fas fa-plus"></i></Link>
 
           {
             this.props.jobs.length === 0 ? (
@@ -90,23 +87,25 @@ class JobsList extends Component {
                               <td>{moment.unix(job.reply).isValid() ? moment.unix(job.reply).format("MMMM D, YYYY") : job.reply}</td>
                               <td>{moment.unix(job.interview).isValid() ? moment.unix(job.interview).format("MMMM D, YYYY") : job.interview}</td>
                               <td>{job.notes}</td>
-                              <td><Link className="button is-medium is-rounded is-light" to={`/jobs/edit/${job.id}`}>Edit</Link></td>
+                              <td><Link className="button is-small is-fullwidth is-rounded is-light" to={`/jobs/edit/${job.id}`}>Edit</Link></td>
                               <td>
                               {
                                 (job.status==='applied' || job.status==='interviewing')?
                                (
                                 <div>
-                                <button className="button"
+                                <button className="button is-info is-small is-fullwidth is-rounded"
+                                style={{marginBottom:"2px"}}
                                 onClick={() =>this.setState({ replyOpen: true,jobID:job.id })}  
                                 >
-                                  Got a reply?
+                                  Got a reply ?
                                 </button>
-                                <button className="button"
+                                <button className="button is-success is-small is-fullwidth is-rounded"
+                                style={{marginBottom:"2px"}}
                                 onClick={() =>this.setState({ interviewOpen: true,jobID:job.id })}                         
                                 >
-                                  Got an interview?
+                                  Got an interview ?
                                 </button>
-                                <button className="button"
+                                <button className="button is-warning is-small is-fullwidth is-rounded"
                                   onClick={() => {
                                     job.status = "archived"
                                     this.props.startEditJob(job.id, job)
@@ -119,7 +118,7 @@ class JobsList extends Component {
 
                                 (
                                   <div>
-                                  <button className="button"
+                                  <button className="button is-success is-small is-fullwidth is-rounded"
                                     onClick={() => {
                                       job.status = "applied"
                                       this.props.startEditJob(job.id, job)
@@ -158,6 +157,7 @@ class JobsList extends Component {
                         id="reply"
                         numberOfMonths={1}
                         readOnly={true}
+                        isOutsideRange={() => false}
                       />
                       </section>
                       <footer className="modal-card-foot">
@@ -194,6 +194,7 @@ class JobsList extends Component {
                       id="interview"
                       numberOfMonths={1}
                       readOnly={true}
+                      isOutsideRange={() => false}
                     />
                     </section>
                     <footer className="modal-card-foot">
@@ -216,7 +217,6 @@ class JobsList extends Component {
                 </div>
               )
           }
-          <Link className='button is-primary is-pulled-right' to="/jobs/new"><i className="fas fa-plus"></i></Link>
 
         </div>
       </section>
