@@ -1,4 +1,4 @@
-# Job Hunt Tracker
+# Jobyzer Beta
 
 
 ## Tech Stack
