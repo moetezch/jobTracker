@@ -7,7 +7,7 @@ import FlipMove from 'react-flip-move'
 
 class BookmarkedJobs extends Component {
   componentDidMount() {
-
+    this.props.startSetBookmarks()
   }
   renderBookmarks(){
     return this.props.bookmarks.map((bookmark) => {
