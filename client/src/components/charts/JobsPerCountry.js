@@ -17,6 +17,7 @@ class JobsPerCountry extends Component {
         countries.push([key, jobsPerCountry[key]])
       }
     }
+    
     return (
       <GeoChart data={countries} height="500px" />
     )
