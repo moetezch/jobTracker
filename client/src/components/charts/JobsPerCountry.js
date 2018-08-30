@@ -16,16 +16,28 @@ class JobsPerCountry extends Component {
       }
     }
     const countriesList=countries.map((country)=>{
-      const flag = `https://www.countryflags.io/${CL.getCode(country[0])}/shiny/32.png`
-      return (
+      let flag=""
+     if (country[0]==="Russia") {
+        flag = `https://www.countryflags.io/RU/shiny/32.png`
+      }else if (country[0]==="South Korea") {
+        flag = `https://www.countryflags.io/KR/shiny/32.png`
+      }
+      else{
+        flag = `https://www.countryflags.io/${CL.getCode(country[0])}/shiny/32.png`
+
+      }
+      if (country[0]!=="Other") {
+        return (
           <div className="column is-2 has-text-centered" key={country[0]}>
             <div>
-          <img src={flag} alt="country[0]"/>
+          <img src={flag} alt={country[0]}/>
           <p className="is-size-6"> {country[0]} : {country[1]}</p>
           </div>
           </div>
     
       )
+      }
+  
     })    
     return (
       <div className="container">
