@@ -18,6 +18,7 @@ class Dashboard extends Component {
       <section className="section">
         <div className="container">
           <JobChartFilters />
+          <p className="is-size-2 has-text-centered">Total : {this.props.jobs.length} applied jobs</p>
           <AppliedJobsPerDay jobs={this.props.jobs} filters={this.props.filters} />
           <JobsPerWebsite jobs={this.props.jobs} websites={this.props.websites} />
           <JobsPerCountry jobs={this.props.jobs} />

@@ -39,6 +39,8 @@ class JobsPerCountry extends Component {
       }
   
     })    
+
+    
     return (
       <div className="container">
       <GeoChart data={countries} height="500px" />
